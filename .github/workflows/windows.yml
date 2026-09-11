@@ -1,0 +1,27 @@
+name: Windows Core
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-core-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ZenVoice.Core tests
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-dotnet@67a3573c9a1b8b0bb85e304b7669c6c65a0c4954 # v5
+        with:
+          dotnet-version: "10.0.x"
+      - run: dotnet test ZenVoice.slnx --configuration Release

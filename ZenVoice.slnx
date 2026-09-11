@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ZenVoice.App/ZenVoice.App.csproj" />
+    <Project Path="src/ZenVoice.Core/ZenVoice.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ZenVoice.Core.Tests/ZenVoice.Core.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,13 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.dll
+*.pdb
+*.wav
+models/
+dist/
+.env
+.env.*
+*.log
