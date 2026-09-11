@@ -47,6 +47,7 @@ public sealed class DictationController
     public bool CleanTranscript { get; set; } = true;
     public bool SaveHistory { get; set; } = true;
     public string EngineId { get; set; } = "local";
+    public Func<string, CancellationToken, Task<string>>? Refine { get; set; }
     public DictationController(
         IAudioCapture capture,
         ITranscriber transcriber,
@@ -129,6 +130,11 @@ public sealed class DictationController
         }
 
         var text = CleanTranscript ? _cleaner.Clean(raw) : raw.Trim();
+        if (Refine is not null)
+        {
+            text = await Refine(text, cancellationToken).ConfigureAwait(false);
+        }
+
         LastTranscript = text;
         if (text.Length == 0)
         {
