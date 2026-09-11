@@ -28,7 +28,7 @@ internal sealed class ShortcutsPage : ISettingsPage
         _pasteSub = NativeUi.Label(parent, id + 6, "Re-insert the most recent transcript anywhere", 0, 0, 360, 20);
         _pasteKey = NativeUi.Label(parent, id + 7, "Windows v1 later", 0, 0, 160, 22);
         _holdTitle = NativeUi.Label(parent, id + 8, "Hold to dictate", 0, 0, 360, 22);
-        _holdKey = NativeUi.Label(parent, id + 9, "Windows v1 later", 0, 0, 160, 22);
+        _holdKey = NativeUi.Label(parent, id + 9, "Right Ctrl", 0, 0, 160, 22);
         _banner = NativeUi.Label(
             parent, id + 10,
             "A two-modifier shortcut is less likely to conflict with other apps.",

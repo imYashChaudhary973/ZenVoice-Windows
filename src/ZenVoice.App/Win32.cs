@@ -95,10 +95,10 @@ internal static class Win32
     public delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
     public delegate void WaveInProc(IntPtr hwi, uint uMsg, IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2);
 
-    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern ushort RegisterClassW(ref WNDCLASS lpWndClass);
 
-    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern IntPtr CreateWindowExW(
         int dwExStyle, string lpClassName, string lpWindowName, int dwStyle,
         int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu,
@@ -110,7 +110,7 @@ internal static class Win32
     [DllImport("user32.dll")] public static extern bool TranslateMessage(ref MSG lpMsg);
     [DllImport("user32.dll")] public static extern IntPtr DispatchMessage(ref MSG lpMsg);
     [DllImport("user32.dll")] public static extern void PostQuitMessage(int nExitCode);
-    [DllImport("user32.dll")] public static extern IntPtr DefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "DefWindowProcW")] public static extern IntPtr DefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
     [DllImport("user32.dll")] public static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
     [DllImport("user32.dll")] public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
     [DllImport("user32.dll")] public static extern bool OpenClipboard(IntPtr hWndNewOwner);
@@ -119,7 +119,7 @@ internal static class Win32
     [DllImport("user32.dll")] public static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "GetClassNameW")]
     public static extern int GetClassName(IntPtr hWnd, char[] lpClassName, int nMaxCount);
     [DllImport("user32.dll")] public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
     [DllImport("user32.dll")] public static extern bool GetGUIThreadInfo(uint idThread, ref GUITHREADINFO pgui);
@@ -128,7 +128,7 @@ internal static class Win32
     [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
     [DllImport("user32.dll")] public static extern IntPtr BeginPaint(IntPtr hWnd, out PAINTSTRUCT lpPaint);
     [DllImport("user32.dll")] public static extern bool EndPaint(IntPtr hWnd, ref PAINTSTRUCT lpPaint);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern bool DrawTextW(IntPtr hdc, string lpchText, int nCount, ref RECT lpRect, uint uFormat);
     [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
     [DllImport("user32.dll")] public static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
@@ -137,20 +137,20 @@ internal static class Win32
     [DllImport("user32.dll")] public static extern bool GetCursorPos(out POINT lpPoint);
     [DllImport("user32.dll")] public static extern uint TrackPopupMenu(IntPtr hMenu, uint uFlags, int x, int y, int nReserved, IntPtr hWnd, IntPtr prcRect);
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern IntPtr FindWindowW(string? lpClassName, string? lpWindowName);
     [DllImport("user32.dll")] public static extern IntPtr LoadCursor(IntPtr hInstance, IntPtr lpCursorName);
     [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr hWnd);
     [DllImport("user32.dll")] public static extern IntPtr CreatePopupMenu();
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "AppendMenuW")]
     public static extern bool AppendMenu(IntPtr hMenu, uint uFlags, UIntPtr uIDNewItem, string lpNewItem);
     [DllImport("user32.dll")] public static extern bool DestroyMenu(IntPtr hMenu);
     [DllImport("user32.dll")] public static extern UIntPtr SetTimer(IntPtr hWnd, UIntPtr nIDEvent, uint uElapse, IntPtr lpTimerFunc);
     [DllImport("user32.dll")] public static extern bool KillTimer(IntPtr hWnd, UIntPtr uIDEvent);
     [DllImport("user32.dll")] public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern bool SetWindowTextW(IntPtr hWnd, string lpString);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern int GetWindowTextW(IntPtr hWnd, char[] lpString, int nMaxCount);
     [DllImport("user32.dll")] public static extern int GetWindowTextLength(IntPtr hWnd);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
@@ -159,7 +159,7 @@ internal static class Win32
     public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
     [DllImport("user32.dll")] public static extern bool EnableWindow(IntPtr hWnd, bool bEnable);
     [DllImport("user32.dll")] public static extern IntPtr SetFocus(IntPtr hWnd);
-    [DllImport("gdi32.dll", CharSet = CharSet.Unicode)]
+    [DllImport("gdi32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern IntPtr CreateFontW(int cHeight, int cWidth, int cEscapement, int cOrientation, int cWeight, uint bItalic, uint bUnderline, uint bStrikeOut, uint iCharSet, uint iOutPrecision, uint iClipPrecision, uint iQuality, uint iPitchAndFamily, string pszFaceName);
     [DllImport("user32.dll")] public static extern int FillRect(IntPtr hDC, ref RECT lprc, IntPtr hbr);
     [DllImport("gdi32.dll")] public static extern IntPtr SelectObject(IntPtr hdc, IntPtr h);

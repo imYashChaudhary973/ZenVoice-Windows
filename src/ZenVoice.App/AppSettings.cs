@@ -11,6 +11,7 @@ internal sealed class AppSettings
     public bool AutoStart { get; set; } = true;
 
     public static AppSettings Current { get; private set; } = Load();
+    public static Action? Applied { get; set; }
 
     public static string Dir => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -45,5 +46,6 @@ internal sealed class AppSettings
         Directory.CreateDirectory(Dir);
         File.WriteAllText(FilePath, JsonSerializer.Serialize(this));
         Current = this;
+        Applied?.Invoke();
     }
 }

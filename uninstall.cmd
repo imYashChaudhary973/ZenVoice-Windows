@@ -1,8 +1,11 @@
 @echo off
 setlocal
-set DEST=%LOCALAPPDATA%\Programs\ZenVoice
+set "DEST=%LOCALAPPDATA%\Programs\ZenVoice"
 taskkill /IM ZenVoice.exe /F >nul 2>&1
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v ZenVoice /f >nul 2>&1
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\ZenVoice" /f >nul 2>&1
+del "%APPDATA%\Microsoft\Windows\Start Menu\Programs\ZenVoice.lnk" >nul 2>&1
+del "%USERPROFILE%\Desktop\ZenVoice.lnk" >nul 2>&1
 rmdir /S /Q "%DEST%" >nul 2>&1
 if /I "%1"=="/data" (
   rmdir /S /Q "%LOCALAPPDATA%\ZenVoice" >nul 2>&1

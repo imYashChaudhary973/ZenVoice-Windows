@@ -17,6 +17,7 @@ internal static class Program
     private static DictationController? _dictation;
     private static TranscriptVault? _vault;
     private static MainWindow? _hud;
+    private static HoldToDictate? _hold;
     private static IntPtr _hwnd;
     private static Win32.WndProc? _proc;
     private static Win32.NOTIFYICONDATA _tray;
@@ -84,8 +85,16 @@ internal static class Program
             _hud,
             _vault);
         ApplySessionSettings();
-        AutoStart.Enable();
+        AppSettings.Applied = ApplySessionSettings;
+        if (AppSettings.Current.AutoStart)
+        {
+            AutoStart.Enable();
+        }
         Win32.RegisterHotKey(_hwnd, HotKeyId, Win32.MOD_CONTROL | Win32.MOD_ALT, Win32.VK_SPACE);
+        _hold = new HoldToDictate(
+            () => _dictation?.Phase == DictationPhase.Listening,
+            Toggle);
+        _hold.Start();
         AddTray();
         _hud.Reveal();
 
@@ -95,6 +104,7 @@ internal static class Program
             Win32.DispatchMessage(ref msg);
         }
 
+        _hold.Dispose();
         Win32.UnregisterHotKey(_hwnd, HotKeyId);
         Win32.Shell_NotifyIcon(Win32.NIM_DELETE, ref _tray);
         _vault.Dispose();
