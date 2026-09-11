@@ -1,0 +1,44 @@
+<Window
+    x:Class="ZenVoice.WinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ZenVoice">
+
+    <Grid Background="#303033">
+        <NavigationView
+            x:Name="Nav"
+            PaneDisplayMode="Left"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            OpenPaneLength="248"
+            Background="#303033">
+            <NavigationView.Resources>
+                <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#303033" />
+                <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="#303033" />
+                <SolidColorBrush x:Key="NavigationViewContentBackground" Color="#39393B" />
+                <SolidColorBrush x:Key="NavigationViewItemForeground" Color="#FEFEFF" />
+                <SolidColorBrush x:Key="NavigationViewItemForegroundSelected" Color="#FEFEFF" />
+                <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#543EF5" />
+            </NavigationView.Resources>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Home" Tag="home" IsSelected="True" />
+                <NavigationViewItem Content="Models" Tag="models" />
+                <NavigationViewItem Content="History" Tag="history" />
+                <NavigationViewItem Content="Personalisation" Tag="personalisation" />
+                <NavigationViewItem Content="Shortcuts" Tag="shortcuts" />
+                <NavigationViewItem Content="Settings" Tag="settings" />
+            </NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame" Background="#39393B">
+                <TextBlock
+                    Margin="32"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="#FEFEFF"
+                    Text="Win32 app still hosts dictation. This is the WinUI shell."
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            </Frame>
+        </NavigationView>
+    </Grid>
+</Window>

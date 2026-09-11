@@ -16,12 +16,13 @@ Local by default. Cloud speech only after **Use**.
 
 | In | Out |
 | --- | --- |
-| Tray + Win32/GDI window (Home / Models / History / Personalisation / Shortcuts / Settings) | Parakeet |
-| `Ctrl+Alt+Space` start/stop | Smart / Cloud formatting |
-| WASAPI 16 kHz mono | Agentic / Command / Write |
-| Whisper Distil / Turbo / Large V3 | Liquid Glass |
-| Optional cloud (keys in Credential Manager) | Signed installer / Authenticode |
-| Clipboard + type / Ctrl+V | |
+| Tray + Win32/GDI window | Smart formatting (Apple Intelligence) |
+| `Ctrl+Alt+Space` start/stop; Right Ctrl hold; `Ctrl+Alt+V` paste-last | Agentic / Command / Write |
+| WASAPI 16 kHz mono | Liquid Glass |
+| Whisper Distil / Turbo / Large V3 | Signed binary (script only: `scripts/sign.ps1`) |
+| Parakeet TDT v3 download; decode needs `parakeet.dll` | WinUI 3 as the running app (shell lives under `src/ZenVoice.WinUI`) |
+| Optional cloud speech and Cloud formatting (text only) | |
+| Clipboard + type / Ctrl+V / UIA | |
 | Encrypted history (AES-GCM, Credential Manager) | |
 | `install.cmd` / `uninstall.cmd`, HKCU Run | |
 

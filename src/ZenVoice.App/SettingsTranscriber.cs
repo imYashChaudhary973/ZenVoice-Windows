@@ -13,10 +13,15 @@ internal sealed class SettingsTranscriber : ITranscriber
 
     internal static ITranscriber Resolve()
     {
-        var id = AppSettings.Current.EngineId;
+        var id = EngineIds.Canonical(AppSettings.Current.EngineId);
         if (EngineIds.IsCloudSpeech(id))
         {
             return new CloudSpeechClient(id, () => CloudKeyStore.Get(id));
+        }
+
+        if (id == EngineIds.ParakeetTdt)
+        {
+            return new ParakeetTranscriber();
         }
 
         return new WhisperTranscriber();

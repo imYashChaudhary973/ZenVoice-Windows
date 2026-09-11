@@ -26,7 +26,7 @@ internal sealed class ShortcutsPage : ISettingsPage
         _startKey = NativeUi.Label(parent, id + 4, "Ctrl+Alt+Space", 0, 0, 160, 22);
         _pasteTitle = NativeUi.Label(parent, id + 5, "Paste latest dictation", 0, 0, 360, 22);
         _pasteSub = NativeUi.Label(parent, id + 6, "Re-insert the most recent transcript anywhere", 0, 0, 360, 20);
-        _pasteKey = NativeUi.Label(parent, id + 7, "Windows v1 later", 0, 0, 160, 22);
+        _pasteKey = NativeUi.Label(parent, id + 7, "Ctrl+Alt+V", 0, 0, 160, 22);
         _holdTitle = NativeUi.Label(parent, id + 8, "Hold to dictate", 0, 0, 360, 22);
         _holdKey = NativeUi.Label(parent, id + 9, "Right Ctrl", 0, 0, 160, 22);
         _banner = NativeUi.Label(

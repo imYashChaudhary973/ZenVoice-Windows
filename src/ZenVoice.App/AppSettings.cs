@@ -7,6 +7,7 @@ internal sealed class AppSettings
 {
     public string EngineId { get; set; } = EngineIds.WhisperDistilLargeV3;
     public string Formatting { get; set; } = "clean";
+    public string CloudFormatEndpoint { get; set; } = "";
     public bool SaveHistory { get; set; } = true;
     public bool AutoStart { get; set; } = true;
 

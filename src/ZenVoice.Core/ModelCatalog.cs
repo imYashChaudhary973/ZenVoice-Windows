@@ -21,6 +21,19 @@ public static class ModelCatalog
     public const string WhisperCppRevision = "5359861c739e955e79d9a303bcbc70fb988958b1";
     public const string DistilRepo = "https://huggingface.co/distil-whisper/distil-large-v3-ggml";
     public const string DistilRevision = "0d78dd96ed9fc152325f63b53788fec3b43de031";
+    public const string ParakeetRepo = "https://huggingface.co/mudler/parakeet-cpp-gguf";
+    public const string ParakeetRevision = "main";
+
+    public static readonly Model Parakeet = new(
+        EngineIds.ParakeetTdt,
+        "Parakeet TDT v3",
+        "tdt-0.6b-v3-q8_0.gguf",
+        "4d69a4a6683f4f2d952bad794c1357ca6eb628027695b4699c5a9ad4cd07d757",
+        940_663_680,
+        ParakeetRepo,
+        ParakeetRevision,
+        "parakeet.cpp GGUF",
+        EnglishOnly: false);
 
     public static readonly Model Turbo = Whisper(
         EngineIds.WhisperLargeV3Turbo,
@@ -49,7 +62,7 @@ public static class ModelCatalog
         "whisper.cpp GGML",
         EnglishOnly: true);
 
-    public static IReadOnlyList<Model> Offered { get; } = [Turbo, LargeV3, Distil];
+    public static IReadOnlyList<Model> Offered { get; } = [Parakeet, Turbo, LargeV3, Distil];
 
     public static Model? Find(string id) =>
         Offered.FirstOrDefault(m => m.Id == EngineIds.Canonical(id));

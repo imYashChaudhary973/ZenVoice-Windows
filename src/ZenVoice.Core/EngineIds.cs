@@ -6,6 +6,7 @@ public static class EngineIds
     public const string WhisperLargeV3Turbo = "whisper-large-v3-turbo";
     public const string WhisperLargeV3 = "whisper-large-v3";
     public const string WhisperDistilLargeV3 = "whisper-distil-large-v3";
+    public const string ParakeetTdt = "parakeetTDT";
     public const string OpenAiTranscribe = "openai-transcribe";
     public const string GeminiTranscribe = "gemini-transcribe";
     public const string ElevenLabsScribe = "elevenlabs-scribe";

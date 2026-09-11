@@ -7,9 +7,10 @@ public class ModelCatalogTests
     [Fact]
     public void OffersExactlyThreeWhisperFiles()
     {
-        Assert.Equal(3, ModelCatalog.Offered.Count);
+        Assert.Equal(4, ModelCatalog.Offered.Count);
         Assert.Equal(
             [
+                EngineIds.ParakeetTdt,
                 EngineIds.WhisperLargeV3Turbo,
                 EngineIds.WhisperLargeV3,
                 EngineIds.WhisperDistilLargeV3

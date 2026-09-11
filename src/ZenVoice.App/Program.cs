@@ -6,6 +6,7 @@ namespace ZenVoice.App;
 internal static class Program
 {
     private const int HotKeyId = 1;
+    private const int HotKeyPasteId = 2;
     private const int CmdExit = 1;
     private const int CmdDownload = 2;
     private const int CmdDelete = 3;
@@ -91,6 +92,7 @@ internal static class Program
             AutoStart.Enable();
         }
         Win32.RegisterHotKey(_hwnd, HotKeyId, Win32.MOD_CONTROL | Win32.MOD_ALT, Win32.VK_SPACE);
+        Win32.RegisterHotKey(_hwnd, HotKeyPasteId, Win32.MOD_CONTROL | Win32.MOD_ALT, Win32.VK_V);
         _hold = new HoldToDictate(
             () => _dictation?.Phase == DictationPhase.Listening,
             Toggle);
@@ -106,6 +108,7 @@ internal static class Program
 
         _hold.Dispose();
         Win32.UnregisterHotKey(_hwnd, HotKeyId);
+        Win32.UnregisterHotKey(_hwnd, HotKeyPasteId);
         Win32.Shell_NotifyIcon(Win32.NIM_DELETE, ref _tray);
         _vault.Dispose();
     }
@@ -151,6 +154,7 @@ internal static class Program
         _dictation.CleanTranscript = AppSettings.Current.Formatting != "off";
         _dictation.SaveHistory = AppSettings.Current.SaveHistory;
         _dictation.EngineId = AppSettings.Current.EngineId;
+        _dictation.Refine = AppSettings.Current.Formatting == "cloud" ? CloudFormatter.Apply : null;
     }
 
     private static IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
@@ -158,6 +162,12 @@ internal static class Program
         if (msg == Win32.WM_HOTKEY && wParam == HotKeyId)
         {
             _ = Toggle();
+            return IntPtr.Zero;
+        }
+
+        if (msg == Win32.WM_HOTKEY && wParam == HotKeyPasteId)
+        {
+            PasteLast();
             return IntPtr.Zero;
         }
 
@@ -185,6 +195,18 @@ internal static class Program
         catch
         {
         }
+    }
+
+    private static void PasteLast()
+    {
+        var text = _dictation?.LastTranscript ?? "";
+        if (text.Length == 0)
+        {
+            return;
+        }
+
+        var result = new WindowsInserter().Insert(text);
+        _hud?.Show(DictationPhase.Success, result == InsertResult.CopiedOnly ? "Copied — paste yourself" : text);
     }
 
     private static void AddTray()
